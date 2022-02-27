@@ -1,0 +1,272 @@
+$article-meta-dot-bg-col: var(--col-text-secondary-offset) !default;
+
+$article-leader-border-width: 0.5px !default;
+$article-leader-border-style: solid !default;
+$article-leader-margin: 1em 0.5em 0.5em 0.5em !default;
+$article-leader-padding: 0 0.5em 0 0.5em !default;
+$article-leader-font-size: 85% !default;
+
+$article-leader-image-float: right !default;
+$article-leader-image-margin: 1em 0 0 0.25em !default;
+$article-leader-image-max-width: 200px !default;
+$article-leader-image-max-height: 100px !default;
+
+// From the theme.
+$article-leader-bg-col: var(--col-bg-secondary) !default;
+
+// Webmentions.
+$article-wm-margin: 2em 0 1em 0 !default;
+
+$article-wm-item-font-size: 90% !default;
+$article-wm-item-width: 100% !default;
+$article-wm-item-margin: 0 0 1em 0 !default;
+$article-wm-item-border: solid 1px !default;
+$article-wm-item-border-col: var(--col-muted) !default;
+$article-wm-item-padding: 0.5em !default;
+
+$article-wm-item-meta-typeicon-width: 32px !default;
+$article-wm-item-meta-typeicon-height: 32px !default;
+$article-wm-item-meta-padding: 0 0 1em 0 !default;
+$article-wm-item-meta-font-size: 80% !default;
+
+$article-wm-item-post-font-size: 80% !default;
+
+$article-wm-item-meta-font-style: italic !default;
+
+$article-wm-item-authorphoto-width: 48px !default;
+$article-wm-item-authorphoto-height: 48px !default;
+
+
+
+article {
+    @include clearfix;
+    .leader {
+        border-width: $article-leader-border-width;
+        border-style: $article-leader-border-style;
+        border-radius: 1em;
+        margin: $article-leader-margin;
+        padding: $article-leader-padding;
+        font-size: $article-leader-font-size;
+        background-color: $article-leader-bg-col;
+    
+        img {
+            float: $article-leader-image-float;
+            margin: $article-leader-image-margin;
+            max-width: $article-leader-image-max-width;
+            max-height: $article-leader-image-max-height;
+        }
+    }
+
+    h1 {
+        a, a:link, a:visited, a:hover, a:active {
+            border-bottom: none;
+        } 
+    }
+
+    .byline, section.tags {
+        font-size: 70%;
+    }
+
+    section.tags {
+        text-align: center;
+    }
+
+    .bigdot {        
+        height: 0.5em;
+        width: 0.5em;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        margin-bottom: 0.15em;
+        border-radius: 50%;
+        display: inline-block;
+        background-color: $article-meta-dot-bg-col;
+    }
+
+    .excerpt {
+        .excerpt-image-link {
+            border-bottom: none;
+            &:link, &:visited, &:hover, &:active {
+                border-bottom: none;
+            }
+        }
+
+        .excerpt-image {
+            float: left;
+            padding: 0 0.5em 0.25em 0;
+            max-width: 250px;
+            max-height: 120px;
+            width: auto;
+            height: auto;
+        }
+
+        a.readmore {
+            float: right;
+            border-bottom: none;
+            margin: 0;
+
+            img {
+                width: 150px;
+                max-width: 150px;
+            }
+
+            &:link, &:visited, &:hover, &:active {
+                border-bottom: none;
+            }
+        }
+    }
+
+    .citation-block {
+        h6 {
+            font-size: 100%;
+            padding: 0;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+        }
+        font-size: 80%;
+        margin-bottom: 2em;
+    }
+
+    footer {
+        margin-top: 1em;
+        
+        .prevnext {
+            margin-top: 1em;
+            font-size: 80%;
+            @include clearfix;
+
+            .prev, .next {
+                display: inline-block;
+            }
+
+            .prev {
+                float: left;
+                padding-right: 0.5em;
+                width: 50%;
+                text-align: left;
+            }
+
+            .next {
+                float: right;
+                padding-left: 0.5em;
+                width: 50%;
+                text-align: right;
+            }
+        }
+    }
+
+    .socialshares {
+        text-align: center;
+        font-size: 80%;
+        margin-top: 1em;
+    
+        .socialshare {
+            margin-right: 1em;
+    
+            &:last-of-type {
+                margin-right: 0;
+            }
+    
+            a, a:link, a:visited, a:hover, a:active {
+                text-decoration: none;
+                border-bottom: 0;
+            }
+    
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }  
+    }
+
+    small.footnote {
+        font-size: 70%;
+    }
+
+    .contactme {
+        text-align: center;
+        font-size: 80%;
+        margin-top: 1em;    
+    }
+
+    .metatax {
+        display: inline;
+    }
+
+    .webmentions {
+        margin: $article-wm-margin;
+    
+        // List of webmentions.
+        .wm-list {
+            list-style: none;
+    
+            // Single webmention.
+            .wm-item {
+                width: $article-wm-item-width;
+                font-size: $article-wm-item-font-size;
+                margin: $article-wm-item-margin;
+                display: flex;
+                flex-direction: row;
+                border: $article-wm-item-border;
+                border-color: $article-wm-item-border-col;
+                padding: $article-wm-item-padding;
+    
+                // Author photo.
+                .wm-authorphoto {
+                    padding-right: 1em;
+                
+                    .u-photo {
+                        width: $article-wm-item-authorphoto-width;
+                        height: $article-wm-item-authorphoto-height;
+                        min-width: $article-wm-item-authorphoto-width;
+                        min-height: $article-wm-item-authorphoto-height;
+                    }
+                }        
+    
+                // Main data.
+                .wm-data {
+                    flex-grow: 1;
+    
+                    // Meta data (date etc.)
+                    .wm-meta {
+                        font-style: $article-wm-item-meta-font-style;
+                        display: inline-block;
+                        padding: $article-wm-item-meta-padding;
+                        font-size: $article-wm-item-meta-font-size;
+                     
+                        .dt-published {
+                            color: var(--col-text-primary);
+                        }
+
+                        .wm-post {
+                            font-size: $article-wm-item-post-font-size;
+                            display: none;
+                        }
+                    }
+                
+                    // Content of webmention.
+                    .p-content {
+                        display: inline-block;
+                    }
+                            
+                }
+    
+                // Type icon.
+                .wm-typeicon {
+                    padding-left: 1em;
+    
+                    img {
+                        width: $article-wm-item-meta-typeicon-width;
+                        height: $article-wm-item-meta-typeicon-height;
+                        min-width: $article-wm-item-meta-typeicon-width;
+                        min-height: $article-wm-item-meta-typeicon-height;
+                    }
+                
+                }
+                    
+            }
+    
+        }    
+            
+    }
+}
+

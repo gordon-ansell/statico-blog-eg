@@ -1,0 +1,56 @@
+---
+type: post
+---
+{% extends 'includes/baseWebPage.njk' %}
+
+{% block main %}
+<article class="h-entry" itemscope itemtype="https://schema.org/Article" itemid="#article">
+    <header>
+        <h1 class="p-name" itemprop="name">{{ title }}</h1>
+        <a style="display:none" class="u-url" href="{{cfg.hostname}}{{permalink}}">{{ title }}</a>
+        {% if (headline) %}
+            <meta itemprop="headline" content="{{ headline }}" />
+        {% else %}
+            <meta itemprop="headline" content="{{ title }}" />
+        {% endif %}
+        <div class="byline">
+            {% meta templateFile %}
+        </div>
+        <link itemprop="publisher" href="#publisher" />
+        <link itemprop="mainEntityOfPage" href="#webpage" />
+    </header>
+
+    <meta itemprop="description" content="{{ description }}" />
+
+    <section class="e-content" itemprop="articleBody">
+        {{ content_html }}
+    </section>
+
+    {% set tc = cfg.taxcount(templateFile, 'tags') %}
+    {% if tc > 0 %}
+        <section class="tags">
+            Article tagged with: {% tags templateFile %}
+        </section>
+    {% endif %}
+
+    <footer>
+        <div class="prevnext">
+            <span class="prev">
+                {% if (prev) %}
+                    <a href="{{ prev.url }}" title="Go to previous (older) post.">&larr; {{ prev.title }}</a>
+                {% else %}
+                    &nbsp;
+                {% endif %}
+            </span>
+            <span class="next">
+                {% if (next) %}
+                    <a href="{{ next.url }}" title="Go to next (newer) post.">{{ next.title }} &rarr;</a>
+                {% else %}
+                    &nbsp;
+                {% endif %}
+            </span>
+        </div>
+    </footer>
+
+</article>
+{% endblock %}

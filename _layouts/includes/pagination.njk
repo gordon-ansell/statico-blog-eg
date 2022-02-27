@@ -1,0 +1,44 @@
+<div class="pagination">
+    <div class="summary">
+        Page {{ pagination.page }} of {{ pagination.totalPages }}.
+    </div>
+    <nav class="paging">
+        <span class="left">
+            {% if pagination.page > 1 %}
+                {% if pagination.page == 2 %}
+                    <a href="/" title="Go to the previous page.">
+                {% else %}
+                    <a href="{{ pagination.urlbase }}{{ pagination.page - 1 }}/" title="Go to the previous page (newer posts).">
+                {% endif %}
+                    <span>&larr; Prev</span>
+                </a>
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </span>
+        <span class="middle">
+            {% for i in range(1, pagination.totalPages + 1) -%}
+                {% if (i == pagination.page) %}
+                    <span class="nav-numbers-wrapper"><span class="nav-numbers current">{{ i }}</span></span>
+                {% else %}           
+                    {% if i == 1 %}
+                        <a href="{{ pagination.urlbase }}" title="Go to page {{ i }}.">
+                    {% else %}
+                        <a href="{{ pagination.urlbase }}{{ i }}/" title="Go to the page {{ i }}.">
+                    {% endif %}
+                        <span class="nav-numbers-wrapper"><span class="nav-numbers">{{ i }}</span></span>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </span>
+        <span class="right">
+            {% if pagination.page < pagination.totalPages %}
+                <a href="{{ pagination.urlbase }}{{ pagination.page + 1 }}/" title="Go to the next page (older posts).">
+                    <span>Next &rarr;</span>
+                </a>
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </span>
+    </div>
+</div>

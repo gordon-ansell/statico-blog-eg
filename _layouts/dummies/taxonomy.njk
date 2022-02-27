@@ -1,0 +1,42 @@
+---
+title: "(((taxtype))): (((entry)))"
+headline: "Posts in the '(((entry)))' taxonomy."
+description: "Posts on this site in the '(((entry)))' taxonomy."
+type: collection
+layout: false
+taxonomy: (((taxtype)))
+entry: (((entry)))
+parse: late
+permalink: /(((taxtypeslug)))/(((entryslug)))/
+robots: noindex,follow
+sitemap: false
+---
+{% set bodyClass="taxonomy-entry" %}
+{% extends 'includes/baseWebPage.njk' %}
+{% block main %}
+
+<div class="h-feed">
+
+    <h1>Posts on this site in the '{{ entry }}' taxonomy, ordered by date</h1>
+
+    {% for post in cfg.collections[taxonomy][entry].desc().values() %}
+
+        <article class="h-entry">
+            <header>
+                <h2><a class="p-name u-url entry-title" property="url" href="{{post.data.permalink}}">{{ post.data.title }}</a></h2>
+                <div class="byline">
+                    {% meta post %}
+                </div>
+            <header>
+            {% if (post.data.description) %}
+                <section class="description p-summary entry-summary" property="description">
+                    {{ post.data.description }}
+                </section>
+            {% endif %}
+        </article>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

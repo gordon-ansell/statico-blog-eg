@@ -1,0 +1,48 @@
+---
+title: Statico
+type: collection
+layout: false
+parse: late
+pagination:
+    data: collections.type.post
+    size: 30
+    page: 1
+    urlbase: /
+---
+{% set bodyClass="home" %}
+{% extends 'includes/baseWebPage.njk' %}
+{% block main %}
+
+<div class="h-feed">
+
+{% for post in cfg.collections.type.post.page(pagination.page, pagination.size) %}
+
+    {% if (cfg.mode == 'dev' or true == post.data.published) %}
+
+        <article class="h-entry">
+            <header>
+                <h2><a class="p-name u-url entry-title" property="url" href="{{post.data.permalink}}">{{ post.data.title }}</a></h2>
+                <div class="byline">
+                    {% meta post %}
+                </div>
+            <header>
+            {% if (post.data.excerpt) %}
+                <section class="excerpt p-summary entry-summary">
+                    {{ post.data.excerpt_html }}
+                    <a class="readmore" href="{{post.data.permalink}}" title="Read this post in full.">
+                        {% simpleimg "/assets/images/read-more.png", alt="Read this post in full.", width="250", height="86" %}
+                    </a>
+                </section>
+            {% endif %}
+        </article>
+
+    {% endif %}
+
+{% endfor %}
+</div>
+
+{% if (pagination.totalPages > 1) %}
+{% include 'includes/pagination.njk' %}
+{% endif %}
+
+{% endblock %}

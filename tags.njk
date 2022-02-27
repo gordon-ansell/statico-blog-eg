@@ -1,0 +1,49 @@
+---
+title: Tags
+headline: Tags used on this site
+description: The tags used to indicate the content of posts on this site.
+type: collection
+layout: false
+parse: late
+navigation:
+    link: /tags/
+    menu: top
+    pos: 6
+---
+{% set bodyClass="taxonomy" %}
+{% extends 'includes/baseWebPage.njk' %}
+
+{% block main %}
+{% breadcrumbs %}
+
+<h1>{{ headline }}</h1>
+<p>Site tags.</p>
+
+    <section class="collection">
+    <table class="flextable">
+
+    {% set lc = 0 %}
+    {% for tag,blk in cfg.collections.tags %}
+
+        {% if lc == 0 %}
+            <tr>
+        {% endif %}
+        <td>
+            {% set cnt = cfg.collections.tags[tag].size %}
+            <a href="/tags/{{ tag | slugify}}/" title="Tag: {{ tag }}">{{ tag }}</a> ({{ cnt }})
+        </td>
+        {% if lc == 2 %}
+            </tr>
+        {% endif %}
+
+        {% set lc = lc + 1 %}
+        {% if lc > 2 %}
+            {% set lc = 0 %}
+        {% endif %}
+
+    {% endfor %}
+
+    </table>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+---
+type: page
+---
+{% extends 'includes/baseWebPage.njk' %}
+
+{% block main %}
+<article class="h-entry" itemscope itemtype="https://schema.org/Article" itemid="#article">
+    <header>
+        <h1 itemprop="name">{{ title }}</h1>
+        {% if (headline) %}
+            <meta itemprop="headline" content="{{ headline }}" />
+        {% else %}
+            <meta itemprop="headline" content="{{ title }}" />
+        {% endif %}
+        <a style="display:none" class="u-url" href="{{cfg.hostname}}{{permalink}}">{{ title }}</a>
+        <link itemprop="publisher" itemref="#publisher" />
+        <link itemprop="mainEntityOfPage" itemref="#webpage" />
+    </header>
+
+    <meta itemprop="description" content="{{ description }}" />
+
+    <section class="e-content" itemprop="articleBody">
+        {{ content_html }}
+    </section>
+
+</article>
+{% endblock %}

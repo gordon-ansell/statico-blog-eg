@@ -1,0 +1,41 @@
+{
+	"name": "statico-blog-eg",
+	"version": "0.1.0",
+	"description": "Example blog using Statico SSG.",
+	"homepage": "https://gordonansell.com/",
+	"license": "MIT",
+	"minimum-stability": "dev",
+    "scripts": {
+        "build": "statico",
+        "serve": "statico --serve",
+        "watch": "statico --watch",
+        "sync": "STATICO_MODE=prod statico --noimages && rsync -a _site/ ../../public_html",
+        "ftp": "statico --ftp",
+        "dryrun": "DEBUG=DryRun* statico --dryrun",
+        "debug": "DEBUG=Statico* statico"
+    },
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gordon-ansell/statico-blog-eg"
+	},
+	"authors": [
+		{
+			"name": "Gordon Ansell",
+			"email": "contact@gordonansell.com",
+			"url": "https://gordonansell.com"
+		}
+	],
+	"dependencies": {
+        "dateformat": "*",
+		"js-framework": "gordon-ansell/js-framework",
+		"statico": "gordon-ansell/statico",
+		"statico-plugin-navigation": "gordon-ansell/statico-plugin-navigation",
+		"statico-plugin-schemahelpers": "gordon-ansell/statico-plugin-schemahelpers",
+		"statico-plugin-scss": "gordon-ansell/statico-plugin-scss",
+        "gas-fw": "gordon-ansell/gas-fw"
+	},
+	"devDependencies": {},
+	"engines": {
+		"node": ">=12"
+	}
+}

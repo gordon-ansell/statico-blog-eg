@@ -1,0 +1,10 @@
+node_modules/
+_site/
+_generatedImages/
+_tmp/
+_conv/
+.cache.json
+.generatedImages.json
+.env
+assets/_generatedImages/
+_data/_webmentions/_cache/

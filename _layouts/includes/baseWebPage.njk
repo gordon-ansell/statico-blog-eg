@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% block headMetaBasics %}
+        <!-- Meta setup -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+    {% endblock %}
+
+    {% set selTitle = '' %}
+    {% if (headline) %}
+        <title>{{ headline }} | {{site.title}}</title>
+        {% set selTitle = headline %}
+    {% elif (title and title == site.title) %}
+        <title>{{ title }}</title>
+        {% set selTitle = title %}
+    {% elif (title) %}
+        <title>{{ title }} | {{site.title}}</title>
+        {% set selTitle = title %}
+    {% elif (site.title) %}
+        <title>{{ site.title }}</title>
+        {% set selTitle = site.title %}
+    {% endif %}
+
+    {% set selDesc = '' %}
+    {% if (leader) %}
+        <meta name="description" content="{{ leader_text }}" />
+        {% set selDesc = leader_text %}
+    {% elif (description) %}
+        <meta name="description" content="{{ description }}" />
+        {% set selDesc = description %}
+    {% elif (site.description) %}
+        <meta name="description" content="{{ site.description }}" />
+        {% set selDesc = site.description %}
+    {% endif %}
+
+    <!-- Theme switcher. -->
+    <style>
+    :root {
+        --col-bg-primary: #FFFFFF;
+        --col-bg-secondary: #fff4ea;
+        --col-text-primary: #373A3C;
+        --col-text-secondary: #279db5;
+        --col-text-secondary-offset: #B56357;
+        --col-border: #279db5;
+        --col-muted: #F4F4F4;
+        --col-code-bg: #003d00;
+        --col-code-text: #00ff80;
+        --col-bq-text: #555555;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --col-bg-primary: #373A3C;
+            --col-bg-secondary: #2F4F4F;
+            --col-text-primary: #FFFFFF;
+            --col-text-secondary: #3de0d3;
+            --col-text-secondary-offset: #e0897b;
+            --col-border: #3de0d3;
+            --col-muted: #0e0f0f;
+            --col-code-bg: #003d00;
+            --col-code-text: #00ff80;
+            --col-bq-text: #f8f8ff;
+        }
+    }
+    </style>
+
+    <!-- Stylesheets. -->
+    <link rel="stylesheet" href="/assets/css/main.css" />
+
+    <!-- Feed. -->
+    <link rel="alternate" title="{{site.title}} - RSS" type="application/rss+xml" href="{{cfg.hostname}}/feed.xml?xray=bob"/>
+
+    {{ cfg.renderInlineCss() }}
+
+    <!-- Canonical. -->
+    <link rel="canonical" href="{{cfg.hostname}}{{permalink}}" />
+
+</head>
+{% if (not bodyClass) %}
+    {% set bodyClass="post" %}
+{% endif %}
+<body class="{{bodyClass}}">
+    <div class="wrapper">
+        <header class="sitehdr">
+            {% include "includes/siteHeader/branding.njk" %}
+            {% include "includes/siteHeader/menuTop.njk" %}
+        </header>
+        <main>
+            {%- block main -%}{%- endblock -%}
+        </main>
+        <footer class="siteftr">
+            {%- if site.copyright -%}
+                <p>{{site.copyright}}</p>
+            {%- endif -%}
+
+        </footer>
+    </div>
+</body>
+</html>

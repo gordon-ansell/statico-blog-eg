@@ -1,0 +1,37 @@
+{% macro author(post,site) %}
+
+    {% if (post.author) %}
+        {% set auth = post.author %}
+    {% elif (site.defaultAuthor) %}
+        {% set auth = site.defaultAuthor %}
+    {% else %}
+        {% set auth = "unknown" %}
+    {% endif %}
+
+    {% if (auth == unknown) %}
+        <span>Unknown</span>
+    {% else %}
+        {% if (site.authors and site.authors[auth]) %}
+            {% set authName = "Unknown" %}
+            {% if (site.authors[auth].name) %}
+                {% set authName = site.authors[auth].name %}
+            {% endif %}
+            {% set authUrl = false %}
+            {% if (site.authors[auth].url) %}
+                {% set authUrl = site.authors[auth].url %}
+            {% endif %}
+        {% endif %}
+
+        {% if (false != authUrl) %}
+            <a href="{{ authUrl }}" title="About this author.">
+        {% endif %}
+        <span class="p-author h-card vcard">
+            <span class="p-name fn">{{ authName }}</span>
+        <span>
+        {% if (false != authUrl) %}
+            </a>
+        {% endif %}
+
+    {% endif %}
+
+{% endmacro %}
